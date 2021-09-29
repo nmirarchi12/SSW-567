@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 28 19:04:48 2021
+
+@author: nmira
+"""
+
+language: python
+python:
+  - "3.5"
+install:
+  - pip install requests
+# command to run tests
+script:
+  - python -m unittest testGitRequest
