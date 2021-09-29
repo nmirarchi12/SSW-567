@@ -15,7 +15,7 @@ from gitRequest import repository_info
 class testGit(unittest.TestCase):
     def test_repository_info(self):
         self.assertEqual(repository_info('nmirarchi12'), True)
-        self.assertEqual(repository_info('john567'), True)
+        self.assertEqual(repository_info('zricethezav'), True)
     def test_repository_info2(self):
         self.assertEqual(repository_info('!'), False, "Error... Account not found of no repos exist")
        
