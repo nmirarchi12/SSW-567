@@ -1,7 +1,9 @@
-######################################################################
-#Author: Nicholas Mirarchi
-#gitRequest.py - fetch user git repos and numbers of commits per repo
-######################################################################
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep 28 15:04:48 2021
+gitRequest.py - fetch user git repos and numbers of commits per repo
+@author: nicholas mirarchi
+"""
 import requests 
 import os 
 import unittest 
@@ -12,6 +14,9 @@ def repository_info(username):
     url_for_user='https://api.github.com/users/{}/repos'.format(username)
     op=[]
     response = requests.get(url_for_user)
+    if response.status_code != 200:
+        print("Error... Account not found or no repos exist")
+        return False
     jsonData = json.loads(response.text)
     op.append('User: {}'.format(username))
     #print(op)
@@ -26,16 +31,18 @@ def repository_info(username):
             op.append('Repo: {} Number of commits: {}'.format(repo, len(response_json)))
             counter+=1
     except (TypeError, KeyError, IndexError):
-        return 'unable to process request'
-    return op
+        return False
+    for i in op:
+        print(i)
+    return True
+
     
 def main():
     username = input("Enter the user Github ID here: ")
+    repository_info(username)
     #token = input("Enter Github access token here: ")
 #username='nmirarchi12'
-#token='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'
-    for item in repository_info(username):
-        print(item)
+'
  
 if __name__ == '__main__':
     main()
