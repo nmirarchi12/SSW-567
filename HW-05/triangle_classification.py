@@ -1,74 +1,47 @@
-import os
 import unittest
 
-def classify_triangle(a,b,c):
+def classify_side_angle(side_a, side_b, side_c):
 	while True:
 		try:
-			a = int(a)
-			b = int(b)
-			c = int(c)
+			side_a = int(side_a)
+			side_b = int(side_b)
+			side_c = int(side_c)
 		except ValueError:
 			return "Invalid entries. Please try again"
-			break
 		else:
-			if (a == 0 or b == 0 or c == 0):
-				return "Not a Triange"
-				break
-			if (a == b and b == c):
+			if side_a == 0 or side_b == 0 or side_c == 0:
+				return "Not a side_ange"
+			if side_a == side_b and side_b == side_c:
 				return "Equilateral"
-				break 
-			if (a != b):
-				if (a == c or b == c):
+			if side_a != side_b:
+				if side_a in (side_c, side_b):
 					return "Isoceles"
-					break
-				if (pow(a,2) + pow(b,2) == pow(c,2)):
+				if pow(side_a, 2) + pow(side_b, 2) == pow(side_c, 2):
 					return "Right"
-					break
-				if (a != c):
+				if side_a != side_c:
 					return "Scalene"
-					break
 
-#a = 3
-#b = 4
-#c = 5
-#result=classify_triangle(a,b,c)
-#print(result)
+def runClassifyside_angle(side_a, side_b, side_c):
+    """ invoke classifyside_angle with the specified arguments and print the result """
+    print('classify_side_angle(', side_a, ', ', side_b, ', ', side_c, ')=', classify_side_angle(side_a, side_b, side_c), sep="")
 
-
-def runClassifyTriangle(a, b, c):
-    """ invoke classifyTriangle with the specified arguments and print the result """
-    print('classify_triangle(',a, ',', b, ',', c, ')=',classify_triangle(a,b,c),sep="")
-
-
-# The remainder of this code implements the unit test functionality
-
-# https://docs.python.org/3/library/unittest.html has a nice description of the framework
-
-class TestTriangles(unittest.TestCase):
-    # define multiple sets of tests as functions with names that begin
-    # with 'test'.  Each function may include multiple tests
+class Testside_angles(unittest.TestCase):
     def testSet1(self): # test invalid inputs
-        # your tests go here.  Include as many tests as you'd like
-        self.assertEqual(classify_triangle(3,4,5),'Right','3,4,5 is a Right triangle')
-        self.assertEqual(classify_triangle('hello',1,2),'Invalid entries. Please try again', 'hello,1,2 Invalid entries. Please try again')
-        self.assertNotEqual(classify_triangle(1,2,3), 'Isoceles', 'Should be Scalene')
-        self.assertNotEqual(classify_triangle(0,0,0), 'Equilateral', 'Should be Not a Triange')
-    
-    def testMyTestSet2(self): 
-        # define multiple test sets to test different aspects of the code
-        # notice that tests can have bugs too!
-        self.assertEqual(classify_triangle(1,1,1),'Equilateral','1,1,1 should be equilateral')
-        self.assertNotEqual(classify_triangle(10,10,10),'Isoceles','Should be Equilateral')
-        self.assertEqual(classify_triangle(10,15,30),'Scalene','Should be Isoceles')
-        
+        self.assertEqual(classify_side_angle(3, 4, 5), 'Right', '3, 4, 5 is a Right side_angle')
+        self.assertEqual(classify_side_angle('hello', 1, 2), 'Invalid entries. Please try again', 'hello, 1, 2 Invalid entries. Please try again')
+        self.assertNotEqual(classify_side_angle(1, 2, 3), 'Isoceles', 'Should be Scalene')
+        self.assertNotEqual(classify_side_angle(0, 0, 0), 'Equilateral', 'Should be Not a side_ange')
+    def testMyTestSet2(self):
+        self.assertEqual(classify_side_angle(1, 1, 1), 'Equilateral', '1, 1, 1 should be equilateral')
+        self.assertNotEqual(classify_side_angle(10, 10, 10), 'Isoceles', 'Should be Equilateral')
+        self.assertEqual(classify_side_angle(10, 15, 30), 'Scalene', 'Should be Isoceles')
 
 if __name__ == '__main__':
     # examples of running the code
-    runClassifyTriangle(1,2,3)
-    runClassifyTriangle(1,1,1)
-    runClassifyTriangle(0,0,0)
-    runClassifyTriangle('hello',1,2)
-    runClassifyTriangle(3,4,5)
-    
-    #unittest.main(exit=False) # this runs all of the tests - use this line if running from Spyder
+    runClassifyside_angle(1, 2, 3)
+    runClassifyside_angle(1, 1, 1)
+    runClassifyside_angle(0, 0, 0)
+    runClassifyside_angle('hello', 1, 2)
+    runClassifyside_angle(3, 4, 5)
+
     unittest.main(exit=True) # this runs all of the tests - use this line if running from the command line
